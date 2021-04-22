@@ -16,7 +16,9 @@ export class MessagesService {
   newMessages: Subject<Message> = new Subject<Message>();
   messages: Observable<Message[]>;
   updates: Subject<any> = new Subject<any>();
+
   create: Subject<Message> = new Subject<Message>();
+  markThreadAsRead: Subject<any> = new Subject<any>();
 
   constructor() {
     this.messages = this.updates.pipe(
@@ -40,6 +42,19 @@ export class MessagesService {
       .subscribe(this.updates);
 
     this.newMessages.subscribe(this.create);
+
+    this.markThreadAsRead.pipe(
+      map( (thread: Thread) => {
+        return (messages: Message[]) => {
+          return messages.map( (message:Message)=>{
+            if(message.thread.id === thread.id) {
+              message.isRead = true;
+            }
+            return message;
+          })
+        }
+      }
+    )).subscribe(this.updates)
   }
 
   addMessage(message: Message): void {

@@ -1,3 +1,4 @@
+import { Message } from "../message/message.model";
 import { uuid } from "../util/uuid";
 
 /**
@@ -5,7 +6,7 @@ import { uuid } from "../util/uuid";
  */
 export class Thread {
   id: string;
-  lastMassege: string;
+  lastMassege: Message;
   name: string;
   avatarSrc: string;
 
