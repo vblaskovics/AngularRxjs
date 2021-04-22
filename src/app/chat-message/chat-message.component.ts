@@ -7,6 +7,7 @@ import {
 import { UsersService } from './../user/users.service';
 
 import { Message } from './../message/message.model';
+import { User } from '../user/user.model';
 
 @Component({
   selector: 'chat-message',
@@ -15,10 +16,13 @@ import { Message } from './../message/message.model';
 })
 export class ChatMessageComponent implements OnInit {
   @Input() message: Message;
+  currentUser: User;
+  incoming: boolean;
 
   constructor(public UsersService: UsersService) {
   }
 
   ngOnInit(): void {
+    
   }
 }
